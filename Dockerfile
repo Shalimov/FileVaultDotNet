@@ -15,5 +15,11 @@ RUN dotnet publish -c release -o /app --no-restore
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
+
+ENV ASPNETCORE_URLS=http://+:3000
+
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "filevault.dll"]
+
+EXPOSE 3000
+
+CMD ["dotnet", "FileVault.dll"]
